@@ -1,9 +1,28 @@
+/*
+* Tiedosto: postfixArray.c
+* Tyyppi: Source
+* Kirjoittaja: Kimmo Heikkinen
+* Kuvaus:
+* Lähdekoodi, joka implementoi postfixArray.h:ssa kuvatun toiminnallisuuden, sekä yhden apufunktion.
+* Käyttää hyväkseen stackCalculator.h:ssa kuvattuja funktiota.
+*
+*/
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "postfixArray.h"
 #include "stackCalculator.h"
 
-
+/*
+* Funktio : isOperator
+* Parametrit: yksi char-merkki
+* Palautusarvo: != 0 jos annettu char on operaattori, muuten 0.
+* Muuttaa. Ei mitään.
+* Kuvaus:
+* Tarkistaa onko annettu merkki operaattori. Käyttää hyväkseen stackCalculator.h:ssa esiteltyjä funktioita.
+*/
 int isOperator(char);
 
 postfixArray* createPostfixArray(char* inputString){
@@ -26,8 +45,15 @@ postfixArray* createPostfixArray(char* inputString){
 		fprintf(stderr, "Creating postfixArray\n");
 	#endif
 	
+	/* Käydään läpi inputString yksi merkki kerrallaan */
 	while((c = inputString[index])){
 	
+		/* 
+		* Tämä kohta vaatinee hieman selittämistä: Jos vastaan tulee literal, eli numero,
+		* algoritmi tämän jälkeen kelaa inputStringiä eteenpäin, kunnes löytää numeron lopun. Tämän jälkeen varataan tarvittavasti
+		* tilaa numerolle ja kopioidaan se tempStringiin. Sitten tempString kopioidaan returnArray:hyn ja jatketaan inputStringin
+		* lukemista numeron jälkeen.
+		*/
 		if(isLiteral(c)){
 		
 			#ifdef DEBUG
@@ -66,7 +92,10 @@ postfixArray* createPostfixArray(char* inputString){
 			returnArray[returnArrayLength] = tempString;
 			returnArrayLength++;
 		}
-		
+		/*
+		* Vastaava operaatio kuin numeron kanssa, mutta koska operaattorit (+, -, /, *) ovat vain yhden merkin
+		* mittaisia, ei pituuden mittausta tarvitse tehdä.
+		*/
 		else if (isOperator(c)){
 		
 			#ifdef DEBUG
@@ -92,6 +121,8 @@ postfixArray* createPostfixArray(char* inputString){
 		index++;
 		
 	}
+	
+	/* luodaan uusi postfixArray-strukti ja talletetaan siihen osoitin luotuun returnArrayhyn*/
 	
 	newPostfixArray = malloc(sizeof(postfixArray));
 	newPostfixArray->array = returnArray;
