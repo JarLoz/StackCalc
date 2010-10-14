@@ -1,3 +1,12 @@
+/*
+* Tiedosto: stack.c
+* Tyyppi: Source
+* Kirjoittaja: Kimmo Heikkinen
+* Kuvaus:
+* Lähdekoodi, joka implementoi stack.h:ssa määritellyn toiminnallisuuden.
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"

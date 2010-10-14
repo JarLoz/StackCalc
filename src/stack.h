@@ -3,7 +3,7 @@
 * Tyyppi: Header
 * Kirjoittaja: Kimmo Heikkinen
 * Kuvaus:
-* stack.h:ssa olevat funktiot toteuttavat pinon toiminnallisuuden double-tyyppisille alkiolle käyttäen
+* stack.h:ssa esitellyt funktiot toteuttavat pinon toiminnallisuuden double-tyyppisille alkiolle käyttäen
 * tunnussolmutonta yhteen suuntaan linkitettyä listaa rakenteenaan. 
 */
 
