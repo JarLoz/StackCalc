@@ -21,6 +21,8 @@ int calculatorAlgo(char** postfix, int size, double* returnValue){
 	
 		string = postfix[postfixIndex];
 		
+		/*Tarkasteluissa tutkitaan vain tokenin ensimmäistä merkkiä, koska se määrää itse tokenin tyypin*/
+		
 		if( isLiteral(string[0]) ){
 			pushValue = atof(string);
 			operationStack = push(pushValue, operationStack);
