@@ -19,7 +19,8 @@
 * luotua taulukkokuvausta itse laskutoimituksesta. Algoritmi käy läpi postfix-muotoisen merkkijonoista koostuvan taulukon, ja
 * suorittaa asiaankuuluvat pinolaskurin toimenpiteet. Kun taulukko on käyty läpi, muutetaan annetun double-pointterin takaa löytyvä
 * arvo pinon päällimmäiseksi arvoksi. Jos pino tyhjenee kesken toimenpiteen, todetaan että laskutoimituksen muoto ei ole validi, ja
-* algoritmin suoritus keskeytetään.
+* algoritmin suoritus keskeytetään ja palautetaan arvo 0 Myös, jos pino ei ole tyhjä toimituksen jälkeen, todetaan että laskutoimituksen 
+* muoto ei ole validi, ja palautetaan arvo 0.
 */
 int calculatorAlgo(char**, int, double*);
 

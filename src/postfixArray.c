@@ -15,6 +15,12 @@
 #include "postfixArray.h"
 #include "stackCalculator.h"
 
+#ifdef TESTMODE
+	#ifndef DEBUG
+		#define DEBUG
+	#endif
+#endif
+
 /*
 * Funktio : isOperator
 * Parametrit: yksi char-merkki

@@ -1,9 +1,25 @@
+/*
+* Tiedosto: stackCalculator.c
+* Tyyppi: Source
+* Kirjoittaja: Kimmo Heikkinen
+* Kuvaus:
+* Lähdekoodi, joka implementoi stackCalculator.h:ssa määritellyn toiminnallisuuden. Käyttää hyväkseen
+* stack.h:ssa määriteltyä toiminnallisuutta
+*
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "stack.h"
 #include "stackCalculator.h"
 
+#ifdef TESTMODE
+	#ifndef DEBUG
+		#define DEBUG
+	#endif
+#endif
 
 int calculatorAlgo(char** postfix, int size, double* returnValue){
 
@@ -17,6 +33,7 @@ int calculatorAlgo(char** postfix, int size, double* returnValue){
 		fprintf(stderr, "Starting calculation, size: %d\n", size);
 	#endif
 	
+	/* Luuppia pyöritetään vain jos validPostfix-lippu osoittaa laskutoimituksen muodon olevan edelleen oikea*/
 	while(postfixIndex < size && validPostfix){
 	
 		string = postfix[postfixIndex];
@@ -86,12 +103,22 @@ int calculatorAlgo(char** postfix, int size, double* returnValue){
 		
 		#ifdef DEBUG
 			printStackContent(operationStack);
+			if(!validPostfix)
+				fprintf(stderr, "Invalid postifix (empty stack), aborting calculation\n");
 		#endif
 		
 		postfixIndex++;
 	}
 	
 	*returnValue =  pop(&operationStack, &validPostfix);
+	
+	/* Jos pino ei ole tyhjä, ei laskutoimitus voinut olla validi */
+	if(operationStack != NULL){
+		validPostfix = 0;
+		#ifdef DEBUG
+			fprintf(stderr, "Invalid postfix (values remain in stack after calculation), aborting calculation\n");
+		#endif
+	}
 	destructStack(operationStack);
 	return validPostfix;
 }
