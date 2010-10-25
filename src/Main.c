@@ -47,9 +47,10 @@ static int usingInFile;
 * Palautusarvo: EXIT_SUCCESS jos ohjelma suoriutui oikein, muuten EXIT_FAILURE
 * Muuttaa: Ei mitään
 * Esittely:
-* Ohjelman pääfunktio. Toteuttaa sekä käyttöliittymän, että ohjelman korkean tason toiminnan, käyttäen postfixArray.h:ssa
-* ja stackCalculator.h:ssa määriteltyä toiminnallisuutta. Jos TESTMODE on määritelty esiprosessointivaiheessa, funktio suorittaa
-* testiajon virheentarkistusmoodissa, jossa ohjelman oikeellisuutta testataan joukolla testitapauksia.
+* Ohjelman pääfunktio. Toteuttaa sekä käyttöliittymän, että ohjelman korkean tason toiminnan, mukaanlukien tiedostonlukemisen
+* ja kirjoittamisen, käyttäen postfixArray.h:ssa ja stackCalculator.h:ssa määriteltyä toiminnallisuutta. Jos TESTMODE on 
+* määritelty esiprosessointivaiheessa, funktio suorittaa testiajon virheentarkistusmoodissa, jossa ohjelman oikeellisuutta 
+* testataan joukolla testitapauksia.
 *
 */
 int main(int argc, char** argv){
