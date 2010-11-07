@@ -104,7 +104,7 @@ int calculatorAlgo(char** postfix, int size, double* returnValue){
 		#ifdef DEBUG
 			printStackContent(operationStack);
 			if(!validPostfix)
-				fprintf(stderr, "Invalid postifix (empty stack), aborting calculation\n");
+				fprintf(stderr, "Invalid postfix (empty stack), aborting calculation\n");
 		#endif
 		
 		postfixIndex++;
@@ -113,7 +113,7 @@ int calculatorAlgo(char** postfix, int size, double* returnValue){
 	*returnValue =  pop(&operationStack, &validPostfix);
 	
 	/* Jos pino ei ole tyhjä, ei laskutoimitus voinut olla validi */
-	if(operationStack != NULL){
+	if(operationStack != NULL && validPostfix){
 		validPostfix = 0;
 		#ifdef DEBUG
 			fprintf(stderr, "Invalid postfix (values remain in stack after calculation), aborting calculation\n");

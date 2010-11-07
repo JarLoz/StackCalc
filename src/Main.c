@@ -15,8 +15,6 @@
 
 /* Laskutoimituksen maksimipituus merkkeinä*/
 #define CALC_MAX_LENGTH 200
-/* Tiedostonimen maksimipituus merkkeinä*/
-#define MAX_FILENAME_LENGTH 200
 
 /*
 * Funktio: printHelp
@@ -62,7 +60,7 @@ int main(int argc, char** argv){
 	#ifndef TESTMODE
 	
 	FILE* inFile = stdin;
-	char calculation[CALC_MAX_LENGTH];
+	char calculation[CALC_MAX_LENGTH+1];
 
 	if(argc > 1){
 	
@@ -83,17 +81,18 @@ int main(int argc, char** argv){
 		}
 		
 	}
-	else
+	else{
 		usingInFile = 0;
-	
-	
+		fprintf(stdout, "> ");
+	}
+
+
 	while(fgets(calculation, CALC_MAX_LENGTH, inFile) != NULL){
 		
 		if(calculation[0] == '\n' || calculation[0] == '\0'){
 			closeEverything(currentPostfix, inFile);
 			return(EXIT_SUCCESS);
 		}
-		
 		currentPostfix = createPostfixArray(calculation);
 		
 		if(calculatorAlgo(currentPostfix->array, currentPostfix->size, &result) == 0){			
@@ -102,10 +101,12 @@ int main(int argc, char** argv){
 			return(EXIT_FAILURE);
 		}	
 		
-		fprintf(stdout, "%s = %f\n", calculation, result);	
+		fprintf(stdout, "%s= %f\n", calculation, result);	
 			
 		destructPostfixArray(currentPostfix);
 		currentPostfix = NULL;
+		if(!usingInFile)
+			fprintf(stdout, "> ");
 	}
 	
 	fclose(inFile);

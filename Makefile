@@ -1,5 +1,5 @@
 # Makefile for stackcalc
-CC = gcc -ansi -pedantic -Wall -Wextra -g -DTESTMODE
+CC = gcc -ansi -pedantic -Wall -Wextra -g
 
 stackcalc: Main.o stackCalculator.o stack.o postfixArray.o
 	$(CC) -lm -o stackcalc Main.o stackCalculator.o stack.o postfixArray.o

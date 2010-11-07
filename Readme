@@ -1,0 +1,93 @@
+Pinolaskuri
+C-ohjelmointi, harjoitustyö
+
+Kimmo Heikkinen
+013760476
+Tietojenkäsittelytieteen laitos
+
+*** Esittely ***
+
+StackCalc on yksinkertainen pinolaskuri, joka laskee yksittäisiä postfix 
+(Reverse Polish Notation, RPN, http://en.wikipedia.org/wiki/Reverse_Polish_Notation)
+-muodossa esitettyjä laskutoimituksia liukuluvuille ja printtaa tuloksen 
+standardisyöttövirtaan. Käytetty algoritmi on hyvin tunnettu ja selitetty 
+yksityiskohtaisesti wikipedialinkissä, joten en tässä ala käymään läpi sitä 
+kovin yksityiskohtaisesti. Perusajatukseltaan algoritmi lukee annettua 
+laskutoimitusta merkki kerrallaan, ja joko lisää tai poistaa lukuja pinosta, 
+suorittaen niille yksittäisiä laskutoimituksia. Kun koko laskutoimitus on käyty 
+läpi, on pinon päällimmäinen arvo laskutoimituksen tulos. Aikavaatimukseltaan 
+ohjelma on selvästi O(n), koska jokaisen syötteessä olevan merkin kohdalle 
+suoritetaan vakioaikainen algoritmi. Tilavaatimukseltaan ohjelma on myös O(n), 
+koska pinon maksimikoko on algoritmin sisältämien lukuarvojen määrä.
+
+Ohjelma toimitetaan pakattuna .tar.gz tiedostona.
+
+*** Kääntäminen ***
+
+Ohjelma käännetään make-ohjelman avulla. Makefile löytyy kansion juuresta, ja 
+kääntäminen tapahtuu yksinkertaisesti komennolla:
+
+make
+
+Tämä kääntää ohjelman ja tuottaa ajettavan binääritiedoston nimeltä "stackcalc".
+
+Jos ohjelmaan haluaa tehdä muutoksia ja kääntää sen uudelleen, tulee ensin 
+siivota vanhentuneet käännösyksiköt ja vanhentunut ajettava tiedosto pois. 
+Tämä tapahtuu nopeimmin komennolla:
+
+make clean
+
+Jos ohjelma halutaan kääntää virheentarkistustilaan, tulee Makefileä muuttaa. Rivi
+
+CC = gcc -ansi -pedantic -Wall -Wextra -g
+
+tulee muuttaa muotoon
+
+CC = gcc -ansi -pedantic -Wall -Wextra -g -DDEBUG
+
+jolloin käännetty ohjelma on virheentarkistustilassa, ja antaa huomattavasti
+enemmän informaatiota algoritmin kulusta. Jos ohjema taas halutaan kääntää
+testimoodiin, on rivi muutettava muotoon
+
+CC = gcc -ansi -pedantic -Wall -Wextra -g -DTESTMODE
+
+jolloin käännetty ohjelma on testitilassa ja ajettaessa suorittaa joukon testejä
+tarkistaakseen algoritmin oikeellisuuden. Huomattavaa on, että testitila säätää
+virheentarkistustilan automaattisesti päälle. Lisää informaatiota virheentarkistustilasta
+ja testitilasta löytyy tämän tiedoston osiosta Testaus.
+
+
+*** Käyttö ***
+
+Kun ohjelma käynnistetään ilman argumentteja, esittää se käyttäjälle komentorivi-
+käyttöliittymän. Tälle riville käyttäjä voi kirjoittaa yksittäisen RPN-muotoisen
+laskutoimituksen, jonka vastauksen ohjelma kirjoittaa standarditulostusvirtaan.
+Tyhjä merkkijono lopettaa ohjelman suorituksen.
+
+Argumenttia "-f tiedostonimi" käyttämällä ohjelma lukee laskutoimitukset annetusta tiedostosta.
+Jokaisen laskutoimituksen oletetaan olevan omalla rivillään. Laskutoimituksien tulokset
+ohjelma printtaa myöskin standarditulostusvirtaan.
+
+Virhetilanteessa, eli käytännössä kun käyttäjä antaa vääränmuotoisen laskutoimituksen,
+ohjelma lopettaa toimintansa ja antaa virheilmoituksen.
+
+Informaatiota ohjelman toiminnasta saa myös käynnistämällä ohjelman argumentilla
+"-h".
+
+Rajoituksia:
+Yksittäisen laskutoimituksen maksimipituus merkkeinä on 200 merkkiä. Tästä yli menevät
+merkit jätetään huomioitta. Yksittäisessä laskutoimituksessa voi olla maksimissaan
+80 tokenia (numeroliteraalia tai +-/* operaattoria). Tämän ylittävät tokenit jätetään
+myöskin huomioitta.
+
+*** Testaus ***
+
+Ohjelman oikeellisuutta voi tarkastella kääntämällä ohjelman testimoodiin, jolloin
+ohjelma ajaa läpi joukon testitapauksia ja tarkastelee syntynyttä tulosta. Testitapaukset
+kattavat kaikki validit laskutoimitukset, sekä kaksi mahdollista epävalidia laskutoimitusta,
+eli tapaus jossa pino tyhjenee kesken laskutoimituksen, ja tapaus jossa pinoon jää arvoja tuloksen
+poistamisen jälkeen.
+
+Ohjelman muistinkäyttöä voi myös tarkastella ajamalla sitä valgrind-ohjelman avulla.
+Sekä normaaleissa tapauksissa, että virheellisissä tapauksissa, ohjelma ei vuoda muistia, koska
+kaikki varatut muistialueet vapautetaan aina ennen ohjelman päättymistä.

@@ -52,7 +52,7 @@ postfixArray* createPostfixArray(char* inputString){
 	#endif
 	
 	/* Käydään läpi inputString yksi merkki kerrallaan */
-	while((c = inputString[index])){
+	while((c = inputString[index]) && returnArrayLength < MAX_TOKENS){
 	
 		/* 
 		* Tämä kohta vaatinee hieman selittämistä: Jos vastaan tulee literal, eli numero,
