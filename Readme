@@ -20,8 +20,6 @@ ohjelma on selvästi O(n), koska jokaisen syötteessä olevan merkin kohdalle
 suoritetaan vakioaikainen algoritmi. Tilavaatimukseltaan ohjelma on myös O(n), 
 koska pinon maksimikoko on algoritmin sisältämien lukuarvojen määrä.
 
-Ohjelma toimitetaan pakattuna .tar.gz tiedostona.
-
 *** Kääntäminen ***
 
 Ohjelma käännetään make-ohjelman avulla. Makefile löytyy kansion juuresta, ja 
